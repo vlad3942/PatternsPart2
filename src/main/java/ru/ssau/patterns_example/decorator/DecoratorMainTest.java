@@ -22,7 +22,7 @@ public class DecoratorMainTest {
             e.printStackTrace();
         }
 
-        Transport sync = tr; //tr; //TestClass.synchronizedTransport(tr);
+        Transport sync = tr;
         for (int i = 0; i < 100000; i++) {
             Thread thread = new Thread(() -> {
                 try {
