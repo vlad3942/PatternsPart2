@@ -6,4 +6,5 @@ public interface IStringWriter {
 
     void writeStrings(String ... str);
 
+    String[] readStrings();
 }

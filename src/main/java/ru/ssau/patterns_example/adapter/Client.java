@@ -20,16 +20,22 @@ public class Client {
         writer.writeStrings(ARR);
     }
 
+    public String[] readStrings() {
+        return writer.readStrings();
+    }
+
     public static void main(String[] args) {
         try (
                 final OutputStream os = new FileOutputStream("tmp.txt");
                 final InputStream is = new FileInputStream("tmp.txt")
         ) {
-            final IStringWriter sw = new StringWriterAdapter(os);
+            final IStringWriter sw = new StringWriterAdapter(os, is);
             final Client client = new Client(sw);
             client.writeStrings();
-            final byte[] bytes = is.readAllBytes();
-            System.out.println(new String(bytes));
+            String[] arr = client.readStrings();
+            for (String s : arr) {
+                System.out.println(s);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
