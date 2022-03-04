@@ -10,15 +10,6 @@ import java.io.IOException;
 public class FacadeOfProcess extends AbstractFacadeOfProcess {
 
     private static final String ROAD_IMAGE_PATH = "src/main/resources/road.png";
-    private static final String CAR_PATH = "src/main/resources/car.png";
-    private static final String TRAFFIC_LIGHT_RED_PATH = "src/main/resources/r.png";
-    private static final String TRAFFIC_LIGHT_GREEN_PATH = "src/main/resources/g.png";
-    private static final String TRAFFIC_LIGHT_YELLOW_PATH = "src/main/resources/y.png";
-    private static final String TRAFFIC_LIGHT_RED_YELLOW_PATH = "src/main/resources/r-y.png";
-
-    private static BufferedImage carPicture;
-    private static BufferedImage tlPicture;
-//    private static BufferedImage roadPicture;
     private BufferedImage roadPicture;
     private JPanel jPanel;
     private JFrame jFrame;
@@ -35,72 +26,6 @@ public class FacadeOfProcess extends AbstractFacadeOfProcess {
         runCarMoving();
         tlSwitcher();
     }
-
-/*
-    public static void main(String[] args) throws IOException {
-
-        roadPicture = ImageIO.read(new File(ROAD_IMAGE_PATH));
-        carPicture = ImageIO.read(new File(CAR_PATH));
-        tlPicture = ImageIO.read(new File(TRAFFIC_LIGHT_GREEN_PATH));
-
-
-        Graphics2D g = (Graphics2D) roadPicture.getGraphics();
-        //g.setStroke(new BasicStroke(3));
-        //g.setColor(Color.BLUE);
-        //g.drawRect(10, 10, roadPicture.getWidth() - 20, roadPicture.getHeight() - 20);
-        //draw traffic light
-        g.drawImage(tlPicture, null, 150, 120);
-        //draw car
-        g.drawImage(carPicture, null, -80, 200);
-
-        JLabel picLabel = new JLabel(new ImageIcon(roadPicture));
-
-        JPanel jPanel = new JPanel();
-        jPanel.add(picLabel);
-
-        JFrame f = new JFrame();
-        f.setSize(new Dimension(roadPicture.getWidth() + 100, roadPicture.getHeight() + 100));
-        f.add(jPanel);
-        f.setVisible(true);
-
-        Thread thread = new Thread(() -> {
-            int carPosition = -80;
-            while (true) {
-                Graphics2D gr = newGr();
-                gr.drawImage(carPicture, null, carPosition, 200);
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                if (carPosition < 380)
-                    carPosition += 20;
-                else
-                    carPosition = -80;
-                JLabel pL = new JLabel(new ImageIcon(roadPicture));
-
-                jPanel.removeAll();
-
-                jPanel.add(pL);
-                f.repaint();
-                f.revalidate();
-                f.pack();
-                f.setLocationRelativeTo(null);
-            }
-        });
-        thread.start();
-    }
-
-    public static Graphics2D newGr() {
-        try {
-            roadPicture = ImageIO.read(new File(ROAD_IMAGE_PATH));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Graphics2D g = (Graphics2D) roadPicture.getGraphics();
-        g.drawImage(tlPicture, null, 150, 120);
-        return g;
-    }*/
 
     private void runCarMoving() {
         Thread thread = new Thread(() -> {
@@ -188,6 +113,7 @@ public class FacadeOfProcess extends AbstractFacadeOfProcess {
         jFrame = new JFrame();
         jFrame.setSize(new Dimension(roadPicture.getWidth() + 100, roadPicture.getHeight() + 100));
         jFrame.add(jPanel);
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setVisible(true);
     }
 }
